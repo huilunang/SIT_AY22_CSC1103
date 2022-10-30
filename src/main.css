@@ -1,0 +1,35 @@
+window {
+    background-color: rgb(255, 255, 255);
+}
+
+grid {
+    margin: 50px 0 0 0;
+}
+
+.buttonPlay {
+    padding: 8em;
+    border-color: rgb(71, 70, 70);
+    border-style: solid;
+}
+
+.buttonPlay:nth-child(-n+3) {
+    border-bottom-width: 1px;
+}
+
+.buttonPlay:nth-child(3n+1) {
+    border-right-width: 1px;
+}
+
+.buttonPlay:nth-child(3n) {
+    border-left-width: 1px;
+}
+
+.buttonPlay:nth-child(n+7) {
+    border-top-width: 1px;
+}
+
+/* detailsBox {
+    border-color: rgb(71, 70, 70);
+    border-style: solid;
+    border-width: 1px;
+} */

@@ -13,3 +13,14 @@ make
 ```
 make clean
 ```
+
+## Run
+1. cd into src folder
+```
+cd src
+```
+
+2. Run executable
+```
+./main
+```
