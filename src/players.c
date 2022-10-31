@@ -1,8 +1,8 @@
 #include "main.h"
 #include "utils.h"
 
-const char PLAYER1 = 'X';
-const char PLAYER2 = 'O';
+char *PLAYER1 = "X";
+char *PLAYER2 = "O";
 
 // Player
 void playerTurn(char playerSym)

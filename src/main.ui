@@ -19,7 +19,7 @@
                         <object id="button1" class="GtkButton">
                             <property name="css-name">button1</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 1</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">0</property>
                                 <property name="row">0</property>
@@ -30,7 +30,7 @@
                         <object id="button2" class="GtkButton">
                             <property name="css-name">button2</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 2</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">1</property>
                                 <property name="row">0</property>
@@ -41,7 +41,7 @@
                         <object id="button3" class="GtkButton">
                             <property name="css-name">button3</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 3</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">2</property>
                                 <property name="row">0</property>
@@ -52,7 +52,7 @@
                         <object id="button4" class="GtkButton">
                             <property name="css-name">button4</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 4</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">0</property>
                                 <property name="row">1</property>
@@ -63,7 +63,7 @@
                         <object id="button5" class="GtkButton">
                             <property name="css-name">button5</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 5</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">1</property>
                                 <property name="row">1</property>
@@ -74,7 +74,7 @@
                         <object id="button6" class="GtkButton">
                             <property name="css-name">button6</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 6</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">2</property>
                                 <property name="row">1</property>
@@ -85,7 +85,7 @@
                         <object id="button7" class="GtkButton">
                             <property name="css-name">button7</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 7</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">0</property>
                                 <property name="row">2</property>
@@ -96,7 +96,7 @@
                         <object id="button8" class="GtkButton">
                             <property name="css-name">button8</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 8</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">1</property>
                                 <property name="row">2</property>
@@ -107,7 +107,7 @@
                         <object id="button9" class="GtkButton">
                             <property name="css-name">button9</property>
                             <property name="css-classes">buttonPlay</property>
-                            <property name="label">Button 9</property>
+                            <property name="label"> </property>
                             <layout>
                                 <property name="column">2</property>
                                 <property name="row">2</property>
