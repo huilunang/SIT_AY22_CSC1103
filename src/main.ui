@@ -133,7 +133,7 @@
                             </child>
                             <child>
                                 <object id="p1LabelScore" class="GtkLabel">
-                                    <property name="label">5</property>
+                                    <property name="label">0</property>
                                 </object>
                             </child>
                         </object>
@@ -154,7 +154,7 @@
                             </child>
                             <child>
                                 <object id="p2LabelScore" class="GtkLabel">
-                                    <property name="label">5</property>
+                                    <property name="label">0</property>
                                 </object>
                             </child>
                         </object>

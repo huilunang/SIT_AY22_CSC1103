@@ -4,6 +4,6 @@
 extern char *PLAYER1;
 extern char *PLAYER2;
 
-void playerTurn(char playerSym);
+void playerTurn(char *playerSym);
 
 #endif

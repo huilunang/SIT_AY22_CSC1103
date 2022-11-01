@@ -6,8 +6,10 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include <gtk/gtk.h>
+#include <glib/gstdio.h>
 
-#define TRUE 1
-#define FALSE 0
+// #define TRUE 1
+// #define FALSE 0
 
 #endif
