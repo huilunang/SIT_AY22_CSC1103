@@ -5,10 +5,12 @@
 // Function to check if there's a winner
 void checkWinner(char *winner)
 {
+    int i;
+
     // check horizontal
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; ++i)
     {
-        if (board[i][0] == board[i][1] && board[i][0] == board[i][2])
+        if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][0] == board[i][2])
         {
             *winner = board[i][0];
             return;
@@ -16,9 +18,9 @@ void checkWinner(char *winner)
     }
 
     // check vertical
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; ++i)
     {
-        if (board[0][i] == board[1][i] && board[0][i] == board[2][i])
+        if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i])
         {
             *winner = board[0][i];
             return;
@@ -26,12 +28,12 @@ void checkWinner(char *winner)
     }
 
     // check diagonal
-    if (board[0][0] == board[1][1] && board[0][0] == board[2][2])
+    if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[0][0] == board[2][2])
     {
         *winner = board[0][0];
         return;
     }
-    if (board[0][2] == board[1][1] && board[0][2] == board[2][0])
+    if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[0][2] == board[2][0])
     {
         *winner = board[0][2];
         return;
@@ -70,7 +72,6 @@ void showWinner(char *winner) // Function to show the winner or draw
     }
 }
 
-
 void setBoard() // Function for setting the 2D board to empty
 {
     for (int row = 0; row < 3; row++)
@@ -82,14 +83,14 @@ void setBoard() // Function for setting the 2D board to empty
     }
 }
 
-void setGrid(GtkWidget *parentWidget)
+void setGrid(GtkWidget *grid)
 {
     for (int row = 0; row < 3; row++)
     {
         for (int col = 0; col < 3; col++)
         {
-            GtkWidget *gridBtn = gtk_grid_get_child_at(parentWidget, row, col);
-            gtk_button_set_label(gridBtn, " ");
+            GtkWidget *gridBtn = gtk_grid_get_child_at(GTK_GRID(grid), row, col);
+            gtk_button_set_label(GTK_BUTTON(gridBtn), " ");
         }
     }
 }
@@ -100,4 +101,36 @@ void setUp() {
     blankSpaces = 9;
     reset = FALSE;
     setBoard();
+}
+
+void incCounterLabel(GObject *obj) {
+    char temp[2];
+    int winnerCount;
+    
+    winnerCount = (*gtk_label_get_label(GTK_LABEL(obj)) - '0') + 1;
+    sprintf(temp, "%d", winnerCount);
+    gtk_label_set_text(GTK_LABEL(obj), temp);
+}
+
+int checkWinnerOrDraw() {
+    checkWinner(winner);
+
+    if (*winner != ' ' || blankSpaces == 0) {
+        g_print("\nTHE WINNER IS: %s", winner);
+        reset = TRUE;
+
+        if (*winner == *PLAYER1) {
+            incCounterLabel(win1);
+        }
+        else if (*winner == *PLAYER2) {
+            incCounterLabel(win2);
+        }
+        else {
+            incCounterLabel(draw);
+        }
+
+        return 1;
+    }
+
+    return 0;
 }

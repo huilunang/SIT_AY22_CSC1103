@@ -4,12 +4,29 @@
 #include "players.h"
 #include "utils.h"
 
+int modeP1 = FALSE;
+
+static void mode_callback(GtkWidget *widget, gpointer data) {
+  modeP1 = !modeP1;
+
+  if (modeP1)
+    gtk_button_set_label(data, "P2");
+  else
+    gtk_button_set_label(data, "P1");
+
+  setUp();
+  setGrid(GTK_WIDGET(grid));
+  gtk_label_set_text(GTK_LABEL(win1), "0");
+  gtk_label_set_text(GTK_LABEL(win2), "0");
+  gtk_label_set_text(GTK_LABEL(draw), "0");
+}
 
 static void play_callback(GtkWidget *widget, gpointer data)
 {
+  g_print("\nThis is modeP1: %d", modeP1);
   // get childButton position
-  GtkWidget *parentWidget = gtk_widget_get_parent(data);
-  GtkLayoutManager *layoutManager = gtk_widget_get_layout_manager(parentWidget);
+  // GtkWidget *parentWidget = gtk_widget_get_parent(data);
+  GtkLayoutManager *layoutManager = gtk_widget_get_layout_manager(GTK_WIDGET(grid));
   GtkLayoutChild *layoutChild = gtk_layout_manager_get_layout_child(layoutManager, data);
   int row = gtk_grid_layout_child_get_row(GTK_GRID_LAYOUT_CHILD(layoutChild));
   int col = gtk_grid_layout_child_get_column(GTK_GRID_LAYOUT_CHILD(layoutChild));
@@ -18,7 +35,7 @@ static void play_callback(GtkWidget *widget, gpointer data)
   if (reset == TRUE)
   {
     setUp();
-    setGrid(parentWidget);
+    setGrid(GTK_WIDGET(grid));
     return;
   }
 
@@ -29,35 +46,25 @@ static void play_callback(GtkWidget *widget, gpointer data)
     gtk_button_set_label(data, curPlayer);
     board[row][col] = *curPlayer;
     --blankSpaces;
+    *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
   }
 
-  checkWinner(winner);
-  
-  if (*winner != ' ' || blankSpaces == 0) {
-    g_print("\nTHE WINNER IS: %s", winner);
-    reset = TRUE;
+  int checkWinnerOrDrawStatus = checkWinnerOrDraw();
+  if (checkWinnerOrDrawStatus == 1)
+    return;
 
-    // GtkBuilder *builder = gtk_builder_new();
-    // gtk_builder_add_from_file(builder, "main.ui", NULL);
-    // GObject *winnerLabel;
-    // if (*winner == *PLAYER1)
-    //   winnerLabel = gtk_builder_get_object(builder, "p1LabelScore");
-    // else
-    //   winnerLabel = gtk_builder_get_object(builder, "p2LabelScore");
-  
-    
-    // char temp[2] = "a";
-    // int winnerCount = (*gtk_label_get_label(GTK_LABEL(winnerLabel)) - '0') + 1;
-    // g_print("\nThis is winnerCount: %d", winnerCount);
-    // sprintf(temp, "%d", winnerCount);
-    // gtk_label_set_label(GTK_LABEL(winnerLabel), temp);
-    // g_print("\nThis is label: %s", gtk_label_get_label(GTK_LABEL(winnerLabel)));
+  if (modeP1 == TRUE) {
+    // return value from AI
+    // gtk_button_set_label(data, curPlayer);
+    // board[row][col] = *curPlayer;
+    --blankSpaces;
 
-    // g_object_unref(builder);
+    // checkWinnerOrDrawStatus = checkWinnerOrDraw();
+    // if (checkWinnerOrDrawStatus == 1)
+    //   return;
+    // set current player to the next player
+    *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
   }
-  
-  // set current player to the next player
-  *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
 }
 
 static void quit_callback(GtkWindow *window)
@@ -96,6 +103,14 @@ static void activate(GtkApplication *app, gpointer user_data)
 
   button = gtk_builder_get_object(builder, "quitBtn");
   g_signal_connect_swapped(button, "clicked", G_CALLBACK(quit_callback), window);
+
+  button = gtk_builder_get_object(builder, "modeBtn");
+  g_signal_connect(button, "clicked", G_CALLBACK(mode_callback), button);
+
+  win1 = gtk_builder_get_object(builder, "p1LabelScore");
+  win2 = gtk_builder_get_object(builder, "p2LabelScore");
+  draw = gtk_builder_get_object(builder, "drawLabelScore");
+  grid = gtk_builder_get_object(builder, "playGrid");
 
   gtk_widget_show(GTK_WIDGET(window));
 

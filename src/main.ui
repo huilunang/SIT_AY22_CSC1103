@@ -144,6 +144,27 @@
                         </object>
                     </child>
                     <child>
+                        <object id="drawDetailsBox" class="GtkBox">
+                            <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+                            <property name="homogeneous">TRUE</property>
+                            <child>
+                                <object id="drawLabel" class="GtkLabel">
+                                    <property name="label">Draw</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object id="drawLabelScore" class="GtkLabel">
+                                    <property name="label">0</property>
+                                </object>
+                            </child>
+                        </object>
+                    </child>
+                    <child>
+                        <object id="w11" class="GtkLabel">
+                            <property name="width-chars">10</property>
+                        </object>
+                    </child>
+                    <child>
                         <object id="p2DetailsBox" class="GtkBox">
                             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
                             <property name="homogeneous">TRUE</property>
@@ -160,7 +181,7 @@
                         </object>
                     </child>
                     <child>
-                        <object id="w11" class="GtkLabel">
+                        <object id="w12" class="GtkLabel">
                             <property name="width-chars">10</property>
                         </object>
                     </child>

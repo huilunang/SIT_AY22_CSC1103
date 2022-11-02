@@ -12,4 +12,10 @@
 // #define TRUE 1
 // #define FALSE 0
 
+GObject *win1;
+GObject *win2;
+GObject *draw;
+GObject *mode;
+GObject *grid;
+
 #endif
