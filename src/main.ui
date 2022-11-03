@@ -139,28 +139,28 @@
                         </object>
                     </child>
                     <child>
-                        <object id="w10" class="GtkLabel">
+                        <object id="w10-1" class="GtkLabel">
                             <property name="width-chars">10</property>
                         </object>
                     </child>
                     <child>
-                        <object id="drawDetailsBox" class="GtkBox">
+                        <object id="tieDetailsBox" class="GtkBox">
                             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
                             <property name="homogeneous">TRUE</property>
                             <child>
-                                <object id="drawLabel" class="GtkLabel">
-                                    <property name="label">Draw</property>
+                                <object id="tieLabel" class="GtkLabel">
+                                    <property name="label">Tie</property>
                                 </object>
                             </child>
                             <child>
-                                <object id="drawLabelScore" class="GtkLabel">
+                                <object id="tieLabelScore" class="GtkLabel">
                                     <property name="label">0</property>
                                 </object>
                             </child>
                         </object>
                     </child>
                     <child>
-                        <object id="w11" class="GtkLabel">
+                        <object id="w10-2" class="GtkLabel">
                             <property name="width-chars">10</property>
                         </object>
                     </child>
@@ -181,7 +181,7 @@
                         </object>
                     </child>
                     <child>
-                        <object id="w12" class="GtkLabel">
+                        <object id="w10-3" class="GtkLabel">
                             <property name="width-chars">10</property>
                         </object>
                     </child>

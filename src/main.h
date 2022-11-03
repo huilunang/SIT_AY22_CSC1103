@@ -9,13 +9,9 @@
 #include <gtk/gtk.h>
 #include <glib/gstdio.h>
 
-// #define TRUE 1
-// #define FALSE 0
-
-GObject *win1;
-GObject *win2;
-GObject *draw;
-GObject *mode;
-GObject *grid;
+GtkLabel *p1Score;
+GtkLabel *p2Score;
+GtkLabel *tieScore;
+GtkGrid *grid;
 
 #endif

@@ -4,6 +4,10 @@
 extern char *PLAYER1;
 extern char *PLAYER2;
 
-void playerTurn(char *playerSym);
+int aiMove[3];
+
+void playerMove(GtkWidget *grid, gpointer data);
+void computerMove(char board[3][3], GtkGrid *grid);
+int minimax(char board[3][3], int player);
 
 #endif
