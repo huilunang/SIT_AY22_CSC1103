@@ -1,9 +1,13 @@
 #ifndef PLAYERS_H_INCLUDED
 #define PLAYERS_H_INCLUDED
 
-extern const char PLAYER1;
-extern const char PLAYER2;
+extern char *PLAYER1;
+extern char *PLAYER2;
 
-void playerTurn(char playerSym);
+int aiMove[3];
+
+void playerMove(GtkWidget *grid, gpointer data);
+void computerMove(char board[3][3], GtkGrid *grid);
+int minimax(char board[3][3], int player);
 
 #endif

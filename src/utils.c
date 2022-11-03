@@ -2,76 +2,101 @@
 #include "players.h"
 #include "utils.h"
 
-// Function to check if there's a winner
-char checkWinner()
+void checkWinner(char *winner)
 {
+    int i;
+
     // check horizontal
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; ++i)
     {
-        if (board[i][0] == board[i][1] && board[i][0] == board[i][2])
+        if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][0] == board[i][2])
         {
-            return board[i][0];
+            *winner = board[i][0];
+            return;
         }
     }
 
     // check vertical
-    for (int i = 0; i < 3; i++)
+    for (i = 0; i < 3; ++i)
     {
-        if (board[0][i] == board[1][i] && board[0][i] == board[2][i])
+        if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[0][i] == board[2][i])
         {
-            return board[0][i];
+            *winner = board[0][i];
+            return;
         }
     }
 
     // check diagonal
-    if (board[0][0] == board[1][1] && board[0][0] == board[2][2])
+    if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[0][0] == board[2][2])
     {
-        return board[0][0];
+        *winner = board[0][0];
+        return;
     }
-    if (board[0][2] == board[1][1] && board[0][2] == board[2][0])
+    if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[0][2] == board[2][0])
     {
-        return board[0][2];
+        *winner = board[0][2];
+        return;
     }
 
-    return ' ';
+    *winner = ' ';
+    return;
 }
 
-void printBoard() // setting the board
+int checkWinnerOrDraw()
 {
-    printf("\n");
-    printf(" %c | %c | %c ", board[0][0], board[0][1], board[0][2]);
-    printf("\n---|---|---\n");
-    printf(" %c | %c | %c ", board[1][0], board[1][1], board[1][2]);
-    printf("\n---|---|---\n");
-    printf(" %c | %c | %c ", board[2][0], board[2][1], board[2][2]);
-    printf("\n");
-}
+    checkWinner(winner);
 
-void showWinner(char winner) // Function to show the winner or draw
-{
-    if (winner == PLAYER1)
+    if (*winner != ' ' || blankSpaces == 0)
     {
-        printf("\nPlayer 1 (X), you are a true maestro at Tic Tac Toe! You Have WON!");
-        printf("\nBetter luck next time Player 2 (O)...");
-    }
-    else if (winner == PLAYER2)
-    {
-        printf("\nSuch unconventional tactics Player 2 (O), you have won!");
-        printf("\nPlayer 1 (X), it is time to put in more hours of practice!");
-    }
-    else
-    {
-        printf("\nNothing Sets Both Of You Apart! It's a DRAW!");
-    }
-}
+        reset = TRUE;
 
-void setBoard() // Function for setting the 2D board to empty
-{
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
+        if (*winner == *PLAYER1)
         {
-            board[i][j] = ' ';
+            incCounterScore(p1Score);
+        }
+        else if (*winner == *PLAYER2)
+        {
+            incCounterScore(p2Score);
+        }
+        else
+        {
+            incCounterScore(tieScore);
+        }
+
+        return 1;
+    }
+
+    return 0;
+}
+
+void incCounterScore(GtkLabel *obj)
+{
+    int winnerCount;
+    char temp[10];
+
+    winnerCount = atoi(gtk_label_get_label(obj)) + 1;
+    sprintf(temp, "%d", winnerCount);
+    gtk_label_set_text(obj, temp);
+}
+
+void setBoard(GtkGrid *grid)
+{
+    for (int row = 0; row < 3; row++)
+    {
+        for (int col = 0; col < 3; col++)
+        {
+            board[row][col] = ' ';
+            GtkWidget *gridBtn = gtk_grid_get_child_at(grid, row, col);
+            gtk_button_set_label(GTK_BUTTON(gridBtn), " ");
         }
     }
+}
+
+void setUp(GtkGrid *grid)
+{
+    strcpy(curPlayer, PLAYER1);
+    *winner = ' ';
+    blankSpaces = 9;
+    reset = FALSE;
+    setBoard(grid);
 }
