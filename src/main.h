@@ -13,5 +13,6 @@ GtkLabel *p1Score;
 GtkLabel *p2Score;
 GtkLabel *tieScore;
 GtkGrid *grid;
+GObject *modeModal;
 
 #endif

@@ -8,10 +8,13 @@ static void mode_callback(GtkWidget *widget, gpointer data)
 {
   modeP1 = !modeP1;
 
-  if (modeP1)
+  if (modeP1) {
     gtk_button_set_label(data, "P2");
-  else
+    gtk_widget_show(GTK_WIDGET(modeModal));
+  }
+  else {
     gtk_button_set_label(data, "P1");
+  }
 
   setUp(grid);
   gtk_label_set_text(p1Score, "0");
@@ -43,7 +46,6 @@ static void play_callback(GtkWidget *widget, gpointer data)
     // Play with AI is enabled
     if (modeP1 == TRUE)
     {
-      g_print("Im inside here");
       // Get move from AI
       computerMove(board, grid);
 
@@ -93,6 +95,8 @@ static void activate(GtkApplication *app, gpointer user_data)
 
   button = gtk_builder_get_object(builder, "modeBtn");
   g_signal_connect(button, "clicked", G_CALLBACK(mode_callback), button);
+  modeModal = gtk_builder_get_object(builder, "modeModal");
+  g_signal_connect_swapped(modeModal, "activate_default", G_CALLBACK(mode_callback), modeModal);
 
   p1Score = GTK_LABEL(gtk_builder_get_object(builder, "p1LabelScore"));
   p2Score = GTK_LABEL(gtk_builder_get_object(builder, "p2LabelScore"));
