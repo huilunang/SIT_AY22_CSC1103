@@ -42,13 +42,10 @@ int minimax(int board[9], int player) {
     move = -1;
     int score = -2;//Losing moves are preferred to no move
     int i;
-    int lower = 1, upper = 10;
-    int randomNo = (rand() % (upper - lower + 1) + lower); // tp create a range of random no from 1-10
-   
+    srand(time(0));
     for(i = 0; i < 9; ++i) {//For all moves,
         if(board[i] == 0) {//If legal,
-        srand(time(0)); // reset the random number every loop or not every loop will be same no
-            if ( randomNo >= 3) { // randomNo greater than 3, break the loop
+            if ( rand() % 10 >= 4) { // randomNo greater than 3, break the loop
                   continue; 
             }
             board[i] = player;//Try the move
