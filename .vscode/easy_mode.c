@@ -45,7 +45,7 @@ int minimax(int board[9], int player) {
     srand(time(0));
     for(i = 0; i < 9; ++i) {//For all moves,
         if(board[i] == 0) {//If legal,
-            if ( rand() % 10 >= 4) { // randomNo greater than 3, break the loop
+            if ( rand() % 10 >= 4) { // if rand() greater than 4 breaks the loop meaning 60% chance for ai to be stupid
                   continue; 
             }
             board[i] = player;//Try the move
