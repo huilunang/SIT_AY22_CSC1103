@@ -19,6 +19,7 @@ void playerMove(GtkWidget *grid, gpointer data) {
 }
 
 // AI
+/* NOTE: DO THE EASY MINMAX CHECK HERE */
 void computerMove(char board[3][3], GtkGrid *grid) {
     int bestScore = -2;
 

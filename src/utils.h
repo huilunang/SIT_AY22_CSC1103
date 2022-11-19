@@ -6,6 +6,8 @@ char curPlayer[2];
 char winner[2];
 int blankSpaces;
 int reset;
+int modeP1;
+int aiEasyMode;
 
 void checkWinner(char *winner);
 int checkWinnerOrDraw();
