@@ -103,6 +103,14 @@ static void activate(GtkApplication *app, gpointer user_data)
   tieScore = GTK_LABEL(gtk_builder_get_object(builder, "tieLabelScore"));
   grid = GTK_GRID(gtk_builder_get_object(builder, "playGrid"));
 
+  // GtkSnapshot *snap = gtk_snapshot_new();
+  // GdkPaintable *painta = gtk_picture_get_paintable(GTK_PICTURE(gtk_builder_get_object(builder, "Mush")));
+  // gdk_paintable_snapshot(painta, snap, 190, 140);
+  // gtk_snapshot_push_opacity(snap, 50);
+  // g_print("height: %d", gdk_paintable_get_intrinsic_height(painta));
+  // g_print("width: %d", gdk_paintable_get_intrinsic_width(painta));
+
+
   // Initialise game variables
   setUp(grid);
 
