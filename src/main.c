@@ -2,7 +2,15 @@
 #include "players.h"
 #include "utils.h"
 
-int modeP1 = FALSE;
+static void modeChoice_callback(GtkWidget *widget, gpointer data) {
+  if (strcmp(gtk_button_get_label(data), "Easy") == 0)
+    aiEasyMode = TRUE;
+  else
+    // Hard mode
+    aiEasyMode = FALSE;
+  
+  gtk_widget_hide(modeModal);
+}
 
 static void mode_callback(GtkWidget *widget, gpointer data)
 {
@@ -10,7 +18,7 @@ static void mode_callback(GtkWidget *widget, gpointer data)
 
   if (modeP1) {
     gtk_button_set_label(data, "P2");
-    gtk_widget_show(GTK_WIDGET(modeModal));
+    gtk_widget_show(modeModal);
   }
   else {
     gtk_button_set_label(data, "P1");
@@ -95,24 +103,22 @@ static void activate(GtkApplication *app, gpointer user_data)
 
   button = gtk_builder_get_object(builder, "modeBtn");
   g_signal_connect(button, "clicked", G_CALLBACK(mode_callback), button);
-  modeModal = gtk_builder_get_object(builder, "modeModal");
+  modeModal = GTK_WIDGET(gtk_builder_get_object(builder, "modeModal"));
   g_signal_connect_swapped(modeModal, "activate_default", G_CALLBACK(mode_callback), modeModal);
+
+  button = gtk_builder_get_object(builder, "buttonModeEasy"); 
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(modeChoice_callback), button);
+  button = gtk_builder_get_object(builder, "buttonModeHard"); 
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(modeChoice_callback), button);
 
   p1Score = GTK_LABEL(gtk_builder_get_object(builder, "p1LabelScore"));
   p2Score = GTK_LABEL(gtk_builder_get_object(builder, "p2LabelScore"));
   tieScore = GTK_LABEL(gtk_builder_get_object(builder, "tieLabelScore"));
   grid = GTK_GRID(gtk_builder_get_object(builder, "playGrid"));
 
-  // GtkSnapshot *snap = gtk_snapshot_new();
-  // GdkPaintable *painta = gtk_picture_get_paintable(GTK_PICTURE(gtk_builder_get_object(builder, "Mush")));
-  // gdk_paintable_snapshot(painta, snap, 190, 140);
-  // gtk_snapshot_push_opacity(snap, 50);
-  // g_print("height: %d", gdk_paintable_get_intrinsic_height(painta));
-  // g_print("width: %d", gdk_paintable_get_intrinsic_width(painta));
-
-
   // Initialise game variables
   setUp(grid);
+  modeP1 = FALSE;
 
   gtk_widget_show(GTK_WIDGET(window));
 
