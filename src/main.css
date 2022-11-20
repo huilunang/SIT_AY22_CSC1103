@@ -45,15 +45,9 @@ mainBox {
 
 .buttonPlay > label {
     font-size: 6em;
-    /* border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px; */
 }
 
 detailsBox {
-    /* border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px; */
     font-size: 1.2em;
     font-weight: 600;
     font-family: monserrat;

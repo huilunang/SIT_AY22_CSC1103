@@ -186,14 +186,22 @@
                             </child>
                         </object>
                     </child>
-                    <!-- <child>
-                        <object id="w10-3" class="GtkLabel">
-                            <property name="width-chars">10</property>
-                        </object>
-                    </child>
+                </object>
+            </child>
+            <child>
+                <object id="buttonBox" class="GtkBox">
+                    <property name="css-name">buttonBox</property>
+                    <property name="halign">GTK_ALIGN_CENTER</property>
+                    <property name="valign">GTK_ALIGN_CENTER</property>
+                    <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
                     <child>
                         <object id="modeBtn" class="GtkButton">
                             <property name="label">P1</property>
+                        </object>
+                    </child>
+                    <child>
+                        <object id="w10-3" class="GtkLabel">
+                            <property name="width-chars">10</property>
                         </object>
                     </child>
                     <child>
