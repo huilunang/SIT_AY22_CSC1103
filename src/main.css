@@ -66,30 +66,14 @@ modeModal {
     border-radius: 3px;
 }
 
-/* modeModalMush {
-    border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px;
-    background-image: url("mario_spirte.png");
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    min-width: 28px;
-    min-height: 38px;
-    animation: contact-avatar infinite;
-    animation-duration: 5s;
-    animation: contact-avatar 0.65s steps(5) infinite; 
-}  */
-
-
  modeModalMush {
-    margin-top: 8px;
-    margin-left: 8px;
-    transform: translate(-8px,-8px);
-    min-width: calc(700px / 5);
-    min-height: 190px; 
+    /* border-color: rgb(71, 70, 70);
+    border-style: solid;
+    border-width: 1px; */
+    min-width: calc(600px / 5);
+    min-height: 88px;
     background-image: url("mario_spirte.png");
-    animation: contact-avatar 1s steps(5) infinite;
+    animation: contact-avatar 0.85s steps(5) infinite;
 } 
 
 
@@ -98,7 +82,7 @@ modeModal {
         background-position: 0px;
     }
     to {
-      background-position: 700px;
+      background-position: -600px;
     }
 }
 

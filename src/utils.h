@@ -1,12 +1,15 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
-char board[3][3];
-char curPlayer[2];
-char winner[2];
 int blankSpaces;
+char board[3][3];
+int boardEmptyPos[9][2];
+int countEmptyPos;
+char curPlayer[2];
 int reset;
+char winner[2];
 
+void checkEmptyPos(int boardEmptyPos[9][2]);
 void checkWinner(char *winner);
 int checkWinnerOrDraw();
 void incCounterScore(GtkLabel *obj);

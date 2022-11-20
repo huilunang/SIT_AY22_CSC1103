@@ -251,10 +251,6 @@
                         <object class="GtkLabel">
                             <property name="use-markup">TRUE</property>
                             <property name="css-name">chooseModeLabel</property>
-                            <!-- <attributes>
-                                <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
-                                <attribute name="background" value="blue" start="5" end="10"/>
-                            </attributes> -->
                             <property name="label">Choose mode</property>
                         </object>
                     </child>
@@ -277,14 +273,6 @@
             <child>
                 <object id="modeModalBoxMush" class="GtkBox">
                     <property name="css-name">modeModalMush</property>
-                    <child>
-                        <!-- <object id="Mush" class="GtkPicture"> -->
-                            <!-- <property name="paintable">mario_spirte.png</property> -->
-                            <!-- <property name="pixel-size">200</property>
-                            <property name="file">mario_spirte.png</property>
-                            <property name="paintable">mario_spirte.png</property> -->
-                        <!-- </object> -->
-                    </child>
                 </object>
             </child>
         </object>
