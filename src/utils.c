@@ -70,16 +70,20 @@ int checkWinnerOrDraw()
         if (*winner == *PLAYER1)
         {
             incCounterScore(p1Score);
+            // gtk_label_set_label(winLabel, "Player 1 Won");
         }
         else if (*winner == *PLAYER2)
         {
             incCounterScore(p2Score);
+            // gtk_label_set_label(winLabel, "Player 2 Won");
         }
         else
         {
             incCounterScore(tieScore);
+            // gtk_label_set_label(winLabel, "It's a tie");
         }
 
+        // gtk_widget_show(winDisplayModal);
         return 1;
     }
 
@@ -109,11 +113,18 @@ void setBoard(GtkGrid *grid)
     }
 }
 
-void setUp(GtkGrid *grid)
+void setUp()
 {
     strcpy(curPlayer, PLAYER1);
     *winner = ' ';
     blankSpaces = 9;
     reset = FALSE;
     setBoard(grid);
+}
+
+void resetBoard() {
+    setUp();
+    gtk_label_set_text(p1Score, "0");
+    gtk_label_set_text(p2Score, "0");
+    gtk_label_set_text(tieScore, "0");
 }

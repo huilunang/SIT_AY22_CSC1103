@@ -14,5 +14,6 @@ GtkLabel *p2Score;
 GtkLabel *tieScore;
 GtkGrid *grid;
 GtkWidget *modeModal;
+GtkWidget *aiDifficultyModal;
 
 #endif

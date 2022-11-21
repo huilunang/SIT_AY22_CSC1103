@@ -2,32 +2,52 @@
 #include "players.h"
 #include "utils.h"
 
-static void modeChoice_callback(GtkWidget *widget, gpointer data) {
+static void quit_callback(GtkWindow *window)
+{
+  gtk_window_close(window);
+}
+
+static void reset_callback(GtkWidget *widget, gpointer data)
+{
+  resetBoard();
+}
+
+static void aiDifficulty_callback(GtkWidget *widget, gpointer data) {
+  modeP1 = TRUE;
+  resetBoard();
+
   if (strcmp(gtk_button_get_label(data), "Easy") == 0)
     aiEasyMode = TRUE;
   else
     // Hard mode
     aiEasyMode = FALSE;
   
+  gtk_widget_hide(aiDifficultyModal);
+}
+
+static void modePlayer_callback(GtkWidget *widget, gpointer data)
+{
+  if (strcmp(gtk_button_get_label(data), "2 Player") == 0) {
+    modeP1 = FALSE;
+    resetBoard();
+  } else {
+    gtk_widget_show(aiDifficultyModal);
+  }
   gtk_widget_hide(modeModal);
 }
 
 static void mode_callback(GtkWidget *widget, gpointer data)
 {
-  modeP1 = !modeP1;
+  gtk_widget_show(modeModal);
+}
 
-  if (modeP1) {
-    gtk_button_set_label(data, "P2");
-    gtk_widget_show(modeModal);
+static void closeModal_callback(GtkWidget *widget, gpointer data)
+{
+  if (strcmp(gtk_widget_get_css_name(data), "modeCloseBtn") == 0) {
+    gtk_widget_hide(modeModal);
+  } else {
+    gtk_widget_hide(aiDifficultyModal);
   }
-  else {
-    gtk_button_set_label(data, "P1");
-  }
-
-  setUp(grid);
-  gtk_label_set_text(p1Score, "0");
-  gtk_label_set_text(p2Score, "0");
-  gtk_label_set_text(tieScore, "0");
 }
 
 static void play_callback(GtkWidget *widget, gpointer data)
@@ -35,7 +55,7 @@ static void play_callback(GtkWidget *widget, gpointer data)
   // reset game
   if (reset == TRUE)
   {
-    setUp(grid);
+    setUp();
     return;
   }
 
@@ -66,11 +86,6 @@ static void play_callback(GtkWidget *widget, gpointer data)
   }
 }
 
-static void quit_callback(GtkWindow *window)
-{
-  gtk_window_close(window);
-}
-
 // Activates GtkApp main window
 static void activate(GtkApplication *app, gpointer user_data)
 {
@@ -98,18 +113,30 @@ static void activate(GtkApplication *app, gpointer user_data)
     g_signal_connect(button, "clicked", G_CALLBACK(play_callback), button);
   }
 
-  button = gtk_builder_get_object(builder, "quitBtn");
-  g_signal_connect_swapped(button, "clicked", G_CALLBACK(quit_callback), window);
-
   button = gtk_builder_get_object(builder, "modeBtn");
   g_signal_connect(button, "clicked", G_CALLBACK(mode_callback), button);
   modeModal = GTK_WIDGET(gtk_builder_get_object(builder, "modeModal"));
-  g_signal_connect_swapped(modeModal, "activate_default", G_CALLBACK(mode_callback), modeModal);
 
-  button = gtk_builder_get_object(builder, "buttonModeEasy"); 
-  g_signal_connect_swapped(button, "clicked", G_CALLBACK(modeChoice_callback), button);
-  button = gtk_builder_get_object(builder, "buttonModeHard"); 
-  g_signal_connect_swapped(button, "clicked", G_CALLBACK(modeChoice_callback), button);
+  button = gtk_builder_get_object(builder, "1PlayerBtn");
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(modePlayer_callback), button);
+  button = gtk_builder_get_object(builder, "2PlayerBtn");
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(modePlayer_callback), button);
+  button = gtk_builder_get_object(builder, "modeCloseBtn");
+  g_signal_connect(button, "clicked", G_CALLBACK(closeModal_callback), button);
+  aiDifficultyModal = GTK_WIDGET(gtk_builder_get_object(builder, "aiDifficultyModal"));
+
+  button = gtk_builder_get_object(builder, "aiEasyBtn"); 
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(aiDifficulty_callback), button);
+  button = gtk_builder_get_object(builder, "aiHardBtn"); 
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(aiDifficulty_callback), button);
+  button = gtk_builder_get_object(builder, "aiDiffCloseBtn");
+  g_signal_connect(button, "clicked", G_CALLBACK(closeModal_callback), button);
+
+  button = gtk_builder_get_object(builder, "resetBtn");
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(reset_callback), button);
+
+  button = gtk_builder_get_object(builder, "quitBtn");
+  g_signal_connect_swapped(button, "clicked", G_CALLBACK(quit_callback), window);
 
   p1Score = GTK_LABEL(gtk_builder_get_object(builder, "p1LabelScore"));
   p2Score = GTK_LABEL(gtk_builder_get_object(builder, "p2LabelScore"));
@@ -117,7 +144,7 @@ static void activate(GtkApplication *app, gpointer user_data)
   grid = GTK_GRID(gtk_builder_get_object(builder, "playGrid"));
 
   // Initialise game variables
-  setUp(grid);
+  setUp();
   modeP1 = FALSE;
 
   gtk_widget_show(GTK_WIDGET(window));
