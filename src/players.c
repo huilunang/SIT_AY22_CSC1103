@@ -61,30 +61,14 @@ void computerMove(char board[3][3], GtkGrid *grid) {
                 int score = -minimax(board, -1);
                 board[row][col] = ' ';
 
-        // set to occupy board
-        board[boardEmptyPos[randPos][0]][boardEmptyPos[randPos][1]] = *PLAYER2;
-
-        // reset the board empty position for next use
-        memset(boardEmptyPos, 0, sizeof(boardEmptyPos[0][0]) * 9 * 2);
-    } else {
-            int bestScore = -2;
-
-            for (int row = 0; row < 3; ++row) {
-                for (int col = 0; col < 3; ++col) {
-                    if (board[row][col] == ' ') {
-                        board[row][col] = *PLAYER2;
-                        // AI: 1, Human Player: -1
-                        int score = -minimax(board, -1);
-                        board[row][col] = ' ';
-
-                        if (score > bestScore) {
-                            bestScore = score;
-                            aiMove[0] = row;
-                            aiMove[1] = col;
-                        }
-                    }
+                if (score > bestScore) {
+                    bestScore = score;
+                    aiMove[0] = row;
+                    aiMove[1] = col;
                 }
             }
+        }
+    }
 
     // update GUI
     GtkWidget *button = gtk_grid_get_child_at(grid, aiMove[1], aiMove[0]);
