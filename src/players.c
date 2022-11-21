@@ -23,53 +23,59 @@ void playerMove(GtkWidget *grid, gpointer data) {
 
 // AI
 void computerMove(char board[3][3], GtkGrid *grid) {
-    srand(time(0));
-    
-    // enable 60% of chance to randomly make AI choose a position
-    if (rand() % 10 >= 4) {
-        // get all the empty position coordinates in the board
-        checkEmptyPos(boardEmptyPos);
-        // randomly select a position to place the move
-        int randPos = rand() % countEmptyPos;
 
-        // update GUI
-        GtkWidget *button = gtk_grid_get_child_at(grid,
-                                                  boardEmptyPos[randPos][1],
-                                                  boardEmptyPos[randPos][0]);
-        gtk_button_set_label(GTK_BUTTON(button), curPlayer);
+    if (aiEasyMode == TRUE) {
+        srand(time(0));
+        
+        // enable 60% of chance to have AI randomly choose a position
+        if (rand() % 10 >= 4) {
+            // get all the empty position coordinates in the board
+            checkEmptyPos(boardEmptyPos);
+            // randomly select a position to place the move
+            int randPos = rand() % countEmptyPos;
 
-        // set to occupy board
-        board[boardEmptyPos[randPos][0]][boardEmptyPos[randPos][1]] = *PLAYER2;
+            // update GUI
+            GtkWidget *button = gtk_grid_get_child_at(grid,
+                                                    boardEmptyPos[randPos][1],
+                                                    boardEmptyPos[randPos][0]);
+            gtk_button_set_label(GTK_BUTTON(button), curPlayer);
 
-        // reset the board empty position for next use
-        memset(boardEmptyPos, 0, sizeof(boardEmptyPos[0][0]) * 9 * 2);
-    } else {
-            int bestScore = -2;
+            // set to occupy board
+            board[boardEmptyPos[randPos][0]][boardEmptyPos[randPos][1]] = *PLAYER2;
+            --blankSpaces;
 
-            for (int row = 0; row < 3; ++row) {
-                for (int col = 0; col < 3; ++col) {
-                    if (board[row][col] == ' ') {
-                        board[row][col] = *PLAYER2;
-                        // AI: 1, Human Player: -1
-                        int score = -minimax(board, -1);
-                        board[row][col] = ' ';
+            // reset the board empty position for next use
+            memset(boardEmptyPos, 0, sizeof(boardEmptyPos[0][0]) * 9 * 2);
 
-                        if (score > bestScore) {
-                            bestScore = score;
-                            aiMove[0] = row;
-                            aiMove[1] = col;
-                        }
-                    }
+            return;
+        }
+    }
+
+    int bestScore = -2;
+
+    for (int row = 0; row < 3; ++row) {
+        for (int col = 0; col < 3; ++col) {
+            if (board[row][col] == ' ') {
+                board[row][col] = *PLAYER2;
+                // AI: 1, Human Player: -1
+                int score = -minimax(board, -1);
+                board[row][col] = ' ';
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    aiMove[0] = row;
+                    aiMove[1] = col;
                 }
             }
-
-        // update GUI
-        GtkWidget *button = gtk_grid_get_child_at(grid, aiMove[1], aiMove[0]);
-        gtk_button_set_label(GTK_BUTTON(button), curPlayer);
-
-        // set to occupy board
-        board[aiMove[0]][aiMove[1]] = *curPlayer;
+        }
     }
+
+    // update GUI
+    GtkWidget *button = gtk_grid_get_child_at(grid, aiMove[1], aiMove[0]);
+    gtk_button_set_label(GTK_BUTTON(button), curPlayer);
+
+    // set to occupy board
+    board[aiMove[0]][aiMove[1]] = *curPlayer;
     --blankSpaces;
 }
 

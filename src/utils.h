@@ -8,8 +8,8 @@ int countEmptyPos;
 char curPlayer[2];
 int reset;
 char winner[2];
-int modeP1;
 int aiEasyMode;
+int modeP1;
 
 void checkEmptyPos(int boardEmptyPos[9][2]);
 void checkWinner(char *winner);
