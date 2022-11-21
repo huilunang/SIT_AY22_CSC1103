@@ -60,6 +60,26 @@ modeModal {
     border-radius: 3px;
 }
 
+ modeModalMush {
+    /* border-color: rgb(71, 70, 70);
+    border-style: solid;
+    border-width: 1px; */
+    min-width: calc(600px / 5);
+    min-height: 88px;
+    background-image: url("mario_spirte.png");
+    animation: contact-avatar 0.85s steps(5) infinite;
+} 
+
+
+@keyframes contact-avatar {
+    from {
+        background-position: 0px;
+    }
+    to {
+      background-position: -600px;
+    }
+}
+
 chooseModeLabel {
     font-size: 1.5em;
 }
