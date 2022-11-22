@@ -2,28 +2,58 @@
 <interface>
   <object id="window" class="GtkWindow">
     <property name="title">Tic Tac Toe</property>
-    <property name="css-name">window</property>
     <property name="default-width">600</property>
     <property name="default-height">600</property>
     <property name="resizable">FALSE</property>
     <property name="deletable">FALSE</property>
+    <property name="css-name">window</property>
     <child>
         <object id="mainBox" class="GtkBox">
-            <property name="css-name">mainBox</property>
             <property name="hexpand">TRUE</property>
             <property name="halign">GTK_ALIGN_CENTER</property>
             <property name="valign">GTK_ALIGN_CENTER</property>
             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
             <property name="spacing">25</property>
+            <property name="css-name">mainBox</property>
+            <child>
+                <object class="GtkBox">
+                    <property name="hexpand">TRUE</property>
+                    <property name="halign">GTK_ALIGN_CENTER</property>
+                    <property name="valign">GTK_ALIGN_CENTER</property>
+                    <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+                    <child>
+                        <object id="noticeModeLabel" class="GtkLabel">
+                            <property name="use-markup">TRUE</property>
+                            <property name="css-name">noticeModeLabel</property>
+                            <property name="label">2 PLAYER MODE</property>
+                        </object>
+                    </child>
+                </object>
+            </child>
+            <child>
+                <object class="GtkBox">
+                    <property name="hexpand">TRUE</property>
+                    <property name="halign">GTK_ALIGN_CENTER</property>
+                    <property name="valign">GTK_ALIGN_CENTER</property>
+                    <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
+                    <child>
+                        <object id="noticeStatusLabel" class="GtkLabel">
+                            <property name="use-markup">TRUE</property>
+                            <property name="css-name">noticeStatusLabel</property>
+                            <property name="label">Player 1's Turn</property>
+                        </object>
+                    </child>
+                </object>
+            </child>
             <child>
                 <object id="playGrid" class="GtkGrid">
-                    <property name="css-name">grid</property>
                     <property name="column-homogeneous">TRUE</property>
                     <property name="row-homogeneous">TRUE</property>
+                    <property name="css-name">grid</property>
                     <child>
                         <object id="button1" class="GtkButton">
                             <property name="css-name">button1</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">0</property>
@@ -34,7 +64,7 @@
                     <child>
                         <object id="button2" class="GtkButton">
                             <property name="css-name">button2</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">1</property>
@@ -45,7 +75,7 @@
                     <child>
                         <object id="button3" class="GtkButton">
                             <property name="css-name">button3</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">2</property>
@@ -56,7 +86,7 @@
                     <child>
                         <object id="button4" class="GtkButton">
                             <property name="css-name">button4</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">0</property>
@@ -67,7 +97,7 @@
                     <child>
                         <object id="button5" class="GtkButton">
                             <property name="css-name">button5</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">1</property>
@@ -78,7 +108,7 @@
                     <child>
                         <object id="button6" class="GtkButton">
                             <property name="css-name">button6</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">2</property>
@@ -89,7 +119,7 @@
                     <child>
                         <object id="button7" class="GtkButton">
                             <property name="css-name">button7</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">0</property>
@@ -100,7 +130,7 @@
                     <child>
                         <object id="button8" class="GtkButton">
                             <property name="css-name">button8</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">1</property>
@@ -111,7 +141,7 @@
                     <child>
                         <object id="button9" class="GtkButton">
                             <property name="css-name">button9</property>
-                            <property name="css-classes">buttonPlay</property>
+                            <property name="css-classes">playBtn</property>
                             <property name="label"> </property>
                             <layout>
                                 <property name="column">2</property>
@@ -123,18 +153,13 @@
             </child>
             <child>
                 <object id="detailsBox" class="GtkBox">
-                    <property name="css-name">detailsBox</property>
                     <property name="halign">GTK_ALIGN_CENTER</property>
                     <property name="valign">GTK_ALIGN_CENTER</property>
                     <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
+                    <property name="spacing">80</property>
+                    <property name="css-name">detailsBox</property>
                     <child>
-                        <object id="p1MarioBox" class="GtkBox">
-                            <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-                            <property name="css-name">p1MarioBox</property>
-                        </object>
-                    </child>
-                    <child>
-                        <object id="p1DetailsBox" class="GtkBox">
+                        <object class="GtkBox">
                             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
                             <property name="homogeneous">TRUE</property>
                             <property name="spacing">10</property>
@@ -151,12 +176,7 @@
                         </object>
                     </child>
                     <child>
-                        <object id="w10-1" class="GtkLabel">
-                            <property name="width-chars">10</property>
-                        </object>
-                    </child>
-                    <child>
-                        <object id="tieDetailsBox" class="GtkBox">
+                        <object class="GtkBox">
                             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
                             <property name="homogeneous">TRUE</property>
                             <property name="spacing">10</property>
@@ -173,12 +193,7 @@
                         </object>
                     </child>
                     <child>
-                        <object id="w10-2" class="GtkLabel">
-                            <property name="width-chars">10</property>
-                        </object>
-                    </child>
-                    <child>
-                        <object id="p2DetailsBox" class="GtkBox">
+                        <object class="GtkBox">
                             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
                             <property name="homogeneous">TRUE</property>
                             <property name="spacing">10</property>
@@ -197,27 +212,26 @@
                 </object>
             </child>
             <child>
-                <object id="buttonBox" class="GtkBox">
-                    <property name="css-name">buttonBox</property>
+                <object class="GtkBox">
                     <property name="halign">GTK_ALIGN_CENTER</property>
                     <property name="valign">GTK_ALIGN_CENTER</property>
                     <property name="orientation">GTK_ORIENTATION_HORIZONTAL</property>
                     <property name="spacing">10</property>
                     <child>
                         <object id="modeBtn" class="GtkButton">
-                            <property name="css-classes">buttonUtils</property>
+                            <property name="css-classes">utilsBtn</property>
                             <property name="label">Mode</property>
                         </object>
                     </child>
                     <child>
                         <object id="resetBtn" class="GtkButton">
-                            <property name="css-classes">buttonUtils</property>
+                            <property name="css-classes">utilsBtn</property>
                             <property name="label">Reset</property>
                         </object>
                     </child>
                     <child>
                         <object id="quitBtn" class="GtkButton">
-                            <property name="css-classes">buttonUtils</property>
+                            <property name="css-classes">utilsBtn</property>
                             <property name="label">Quit</property>
                         </object>
                     </child>
@@ -227,11 +241,11 @@
     </child>
   </object>
   <object id="modeModal" class="GtkWindow">
+    <property name="default-width">600</property>
+    <property name="default-height">750</property>
     <property name="modal">TRUE</property>
     <property name="transient-for">window</property>
     <property name="decorated">FALSE</property>
-    <property name="default-width">600</property>
-    <property name="default-height">670</property>
     <property name="sensitive">TRUE</property>
     <property name="focusable">TRUE</property>
     <property name="css-name">modeModal</property>
@@ -283,17 +297,17 @@
     </child>
   </object>
   <object id="aiDifficultyModal" class="GtkWindow">
+    <property name="default-width">600</property>
+    <property name="default-height">750</property>
     <property name="modal">TRUE</property>
     <property name="transient-for">window</property>
     <property name="decorated">FALSE</property>
-    <property name="default-width">600</property>
-    <property name="default-height">670</property>
     <property name="sensitive">TRUE</property>
     <property name="focusable">TRUE</property>
-    <property name="css-name">winDisplayModal</property>
+    <property name="css-name">aiDifficultyModal</property>
     <property name="css-classes">modals</property>
     <child>
-        <object id="aiDifficultyModalBox" class="GtkBox">
+        <object class="GtkBox">
             <property name="halign">GTK_ALIGN_CENTER</property>
             <property name="valign">GTK_ALIGN_CENTER</property>
             <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
@@ -301,7 +315,7 @@
             <child>
                 <object class="GtkLabel">
                     <property name="use-markup">TRUE</property>
-                    <property name="css-name">aiDifficultyLable</property>
+                    <property name="css-name">aiDifficultyLabel</property>
                     <property name="css-classes">modeLabel</property>
                     <property name="label">CHOOSE LEVEL</property>
                 </object>

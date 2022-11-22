@@ -1,4 +1,5 @@
 #include "main.h"
+#include "init.h"
 #include "players.h"
 #include "utils.h"
 
@@ -70,17 +71,20 @@ int checkWinnerOrDraw()
         if (*winner == *PLAYER1)
         {
             incCounterScore(p1Score);
-            // gtk_label_set_label(winLabel, "Player 1 Won");
+            gtk_label_set_label(noticeStatusLabel, "Player 1 Won");
         }
         else if (*winner == *PLAYER2)
         {
             incCounterScore(p2Score);
-            // gtk_label_set_label(winLabel, "Player 2 Won");
+            if (modeP1 == TRUE)
+                gtk_label_set_label(noticeStatusLabel, "Computer Won");
+            else
+                gtk_label_set_label(noticeStatusLabel, "Player 2 Won");
         }
         else
         {
             incCounterScore(tieScore);
-            // gtk_label_set_label(winLabel, "It's a tie");
+            gtk_label_set_label(noticeStatusLabel, "It's a tie");
         }
 
         // gtk_widget_show(winDisplayModal);
@@ -124,6 +128,7 @@ void setUp()
 
 void resetBoard() {
     setUp();
+    gtk_label_set_label(noticeStatusLabel, "Player 1's Turn");
     gtk_label_set_text(p1Score, "0");
     gtk_label_set_text(p2Score, "0");
     gtk_label_set_text(tieScore, "0");
