@@ -18,5 +18,6 @@ void incCounterScore(GtkLabel *obj);
 void setBoard(GtkGrid *grid);
 void setUp();
 void resetBoard();
+void play_sound(int option);
 
 #endif

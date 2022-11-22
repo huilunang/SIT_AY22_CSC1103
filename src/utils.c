@@ -3,7 +3,8 @@
 #include "players.h"
 #include "utils.h"
 
-void checkEmptyPos(int boardEmptyPos[9][2]) {
+void checkEmptyPos(int boardEmptyPos[9][2])
+{
     countEmptyPos = 0;
 
     for (int row = 0; row < 3; ++row) {
@@ -87,7 +88,6 @@ int checkWinnerOrDraw()
             gtk_label_set_label(noticeStatusLabel, "It's a tie");
         }
 
-        // gtk_widget_show(winDisplayModal);
         return 1;
     }
 
@@ -126,10 +126,19 @@ void setUp()
     setBoard(grid);
 }
 
-void resetBoard() {
+void resetBoard()
+{
     setUp();
     gtk_label_set_label(noticeStatusLabel, "Player 1's Turn");
     gtk_label_set_text(p1Score, "0");
     gtk_label_set_text(p2Score, "0");
     gtk_label_set_text(tieScore, "0");
+}
+
+void play_sound(int option)
+{
+  if (option == 0)
+    system("afplay xo_sound_effect.wav");
+  else
+    system("afplay smb_stage_clear.wav");
 }

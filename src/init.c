@@ -18,7 +18,8 @@ static void reset_callback(GtkWidget *widget, gpointer data)
   resetBoard();
 }
 
-static void aiDifficulty_callback(GtkWidget *widget, gpointer data) {
+static void aiDifficulty_callback(GtkWidget *widget, gpointer data)
+{
   gtk_label_set_label(noticeModeLabel, "1 PLAYER MODE");
   gtk_label_set_label(p2Label, "Computer (O)");
   modeP1 = TRUE;
@@ -29,7 +30,7 @@ static void aiDifficulty_callback(GtkWidget *widget, gpointer data) {
   else
     // Hard mode
     aiEasyMode = FALSE;
-  
+
   gtk_widget_hide(aiDifficultyModal);
 }
 
@@ -64,33 +65,36 @@ static void mode_callback(GtkWidget *widget, gpointer data)
 static void play_callback(GtkWidget *widget, gpointer data)
 {
   // reset game
-  if (reset == TRUE)
-  {
+  if (reset == TRUE) {
     setUp();
     gtk_label_set_label(noticeStatusLabel, "Player 1's Turn");
     return;
   }
 
   // Set button label only if grid position not taken
-  if (strcmp(gtk_button_get_label(data), " ") == 0)
-  {
+  if (strcmp(gtk_button_get_label(data), " ") == 0) {
     playerMove(GTK_WIDGET(grid), data);
+    play_sound(0);
 
-    if (checkWinnerOrDraw() == 1)
+    if (checkWinnerOrDraw() == 1) {
+      play_sound(1);
       return;
+    }
 
     // set curPlayer to the next player
     *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
 
     // Play with AI is enabled
-    if (modeP1 == TRUE)
-    {
+    if (modeP1 == TRUE) {
       gtk_label_set_label(noticeStatusLabel, "Computer's Turn");
       // Get move from AI
       computerMove(board, grid);
+      play_sound(0);
 
-      if (checkWinnerOrDraw() == 1)
+      if (checkWinnerOrDraw() == 1) {
+        play_sound(1);
         return;
+      }
 
       *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
       gtk_label_set_label(noticeStatusLabel, "Player 1's Turn");
@@ -147,9 +151,9 @@ void activate(GtkApplication *app, gpointer user_data)
   g_signal_connect(button, "clicked", G_CALLBACK(closeModal_callback), button);
   aiDifficultyModal = GTK_WIDGET(gtk_builder_get_object(builder, "aiDifficultyModal"));
 
-  button = gtk_builder_get_object(builder, "aiEasyBtn"); 
+  button = gtk_builder_get_object(builder, "aiEasyBtn");
   g_signal_connect_swapped(button, "clicked", G_CALLBACK(aiDifficulty_callback), button);
-  button = gtk_builder_get_object(builder, "aiHardBtn"); 
+  button = gtk_builder_get_object(builder, "aiHardBtn");
   g_signal_connect_swapped(button, "clicked", G_CALLBACK(aiDifficulty_callback), button);
   button = gtk_builder_get_object(builder, "aiDiffCloseBtn");
   g_signal_connect(button, "clicked", G_CALLBACK(closeModal_callback), button);
