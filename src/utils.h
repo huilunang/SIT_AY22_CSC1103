@@ -16,6 +16,7 @@ void checkWinner(char *winner);
 int checkWinnerOrDraw();
 void incCounterScore(GtkLabel *obj);
 void setBoard(GtkGrid *grid);
-void setUp(GtkGrid *grid);
+void setUp();
+void resetBoard();
 
 #endif

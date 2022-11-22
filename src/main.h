@@ -9,10 +9,4 @@
 #include <gtk/gtk.h>
 #include <glib/gstdio.h>
 
-GtkLabel *p1Score;
-GtkLabel *p2Score;
-GtkLabel *tieScore;
-GtkGrid *grid;
-GtkWidget *modeModal;
-
 #endif

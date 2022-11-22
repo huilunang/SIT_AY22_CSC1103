@@ -1,49 +1,48 @@
-window {
-    /* background-color: rgb(255, 255, 255); */
-    background-image: url("mario_background.png");
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-/* grid {
-    margin: 5em;
-} */
-
+/* Main Window */
 mainBox {
-    border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px;
-    min-height: 5em;
-    min-width: 5em;
-    margin: 3em;
+    margin: 2em;
 }
 
-.buttonPlay {
+noticeModeLabel {
+    padding: 0.5em 5.5em;
+    font-size: 2em;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: rgb(71, 70, 70);
+}
+
+noticeStatusLabel {
+    padding: 0.5em 2em;
+    font-size: 1.1em;
+    background: rgb(249, 248, 239);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.playBtn {
+    min-height: 5em;
+    min-width: 5em;
     padding: 3.5em;
-    min-height: 5em;
-    min-width: 5em;
     border-color: rgb(71, 70, 70);
     border-style: solid;
 }
 
-.buttonPlay:nth-child(-n+3) {
+.playBtn:nth-child(-n+3) {
     border-bottom-width: 1px;
 }
 
-.buttonPlay:nth-child(3n+1) {
+.playBtn:nth-child(3n+1) {
     border-right-width: 1px;
 }
 
-.buttonPlay:nth-child(3n) {
+.playBtn:nth-child(3n) {
     border-left-width: 1px;
 }
 
-.buttonPlay:nth-child(n+7) {
+.playBtn:nth-child(n+7) {
     border-top-width: 1px;
 }
 
-.buttonPlay > label {
+.playBtn > label {
     font-size: 6em;
 }
 
@@ -53,47 +52,85 @@ detailsBox {
     font-family: monserrat;
 }
 
-modeModal {
+.utilsBtn {
+    min-width: 1.2em;
+    padding: 5px 2.5em;
+    border-radius: 0.5rem;
     border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
+    color: rgb(71, 70, 70);
+    background: transparent;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+    transition: transform 150ms ease;
 }
 
- modeModalMush {
-    /* border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px; */
+.utilsBtn:hover {
+    transform: scale(1.05);
+}
+
+/* Modal Windows */
+.modals {
+    background: rgb(246, 245, 244);
+}
+
+/* modeModal */
+modeModalMush {
     min-width: calc(600px / 5);
     min-height: 88px;
-    background-image: url("mario_spirte.png");
-    animation: contact-avatar 0.85s steps(5) infinite;
-} 
-
-
-@keyframes contact-avatar {
-    from {
-        background-position: 0px;
-    }
-    to {
-      background-position: -600px;
-    }
+    background: url("mario_spirte.png");
+    animation: jumpy-mush 0.85s steps(5) infinite;
+    transform: translate(12.5em, -6.5em);
 }
 
-chooseModeLabel {
-    font-size: 1.5em;
+.modeLabel {
+    font-weight: 400;
+    font-size: 2.5em;
+    color: rgb(71, 70, 70);
 }
 
-.buttonMode {
-    transition: 0.25s;
-    border-color: rgb(71, 70, 70);
-    border-style: solid;
-    border-width: 1px;
+.modalBtn {
+    min-width: 1.2em;
     padding: 0.5em 2em;
     font-size: 2em;
+    border-width: 2px;
+    border-radius: 0.5rem;
+    border-color: rgb(71, 70, 70);
+    border-style: solid;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: rgb(253, 249, 249);
+    background: rgb(80, 80, 80);
+    transition: transform 150ms ease;
 }
 
-.buttonMode:hover {
-    box-shadow: inset 0 0 0 2em rgb(71, 70, 70);
-    color: rgb(253, 249, 249);
+.closeBtn {
+    border-radius: 0.5rem;
+    border-color: rgb(71, 70, 70);
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 2em;
+    padding: 0.5em 2em;
+    color: rgb(71, 70, 70);
+}
+
+.closeBtn:hover,
+.modalBtn:hover {
+    transform: scale(1.05);
+}
+
+twoPlayerBtn,
+aiHardBtn {
+    margin-bottom: 1.1em;
+}
+
+
+/* winDisplayModal */
+winDisplayModal {
+    color: rgb(71, 70, 70);
+}
+
+closeDisplayBtn {
+    padding: 5px 2.5em;
+    border-width: 1px;
+    border-radius: 0.5rem;
+    border-color: rgb(71, 70, 70);
 }
