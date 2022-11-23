@@ -7,10 +7,7 @@ void checkEmptyPos(int boardEmptyPos[9][2]) {
     countEmptyPos = 0;
 
     for (int row = 0; row < 3; ++row) {
-        for (int col = 0; col < 3; ++col) {
-            boardEmptyPos[countEmptyPos][0] = 0;
-            boardEmptyPos[countEmptyPos][1] = 0;
-            
+        for (int col = 0; col < 3; ++col) {            
             if (board[row][col] == ' ') {
                 boardEmptyPos[countEmptyPos][0] = row;
                 boardEmptyPos[countEmptyPos][1] = col;
