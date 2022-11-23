@@ -6,9 +6,9 @@
 char *PLAYER1 = "X";
 char *PLAYER2 = "O";
 
-// Player
+// Triggers when player makes a move and set player symbol on the board
 void playerMove(GtkWidget *grid, gpointer data) {
-    // Get grid position from GUI
+    // Get grid position when user click from GUI
     GtkLayoutManager *layoutManager = gtk_widget_get_layout_manager(grid);
     GtkLayoutChild *layoutChild = gtk_layout_manager_get_layout_child(layoutManager, data);
     int row = gtk_grid_layout_child_get_row(GTK_GRID_LAYOUT_CHILD(layoutChild));
@@ -22,14 +22,14 @@ void playerMove(GtkWidget *grid, gpointer data) {
     --blankSpaces;
 }
 
-// AI
+// If 1 player mode is enabled, it gets triggers next after player makes a move
 void computerMove(char board[3][3], GtkGrid *grid) {
-
     if (aiEasyMode == TRUE) {
+        // Sets seed to current time to generate a new number when rand() is called
         srand(time(0));
         
-        // enable 60% of chance to have AI randomly choose a position
-        if (rand() % 10 >= 4) {
+        // 30% chance to have AI randomly choose a position
+        if (rand() % 9 > 2) {
             // get all the empty position coordinates in the board
             checkEmptyPos(boardEmptyPos);
             // randomly select a position to place the move
@@ -52,8 +52,11 @@ void computerMove(char board[3][3], GtkGrid *grid) {
         }
     }
 
+    // Losing move is preferred to no move
     int bestScore = -2;
 
+    // For every empty position, recursively call minimax to check 
+    // for the next most optimal move
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {
             if (board[row][col] == ' ') {
@@ -71,7 +74,7 @@ void computerMove(char board[3][3], GtkGrid *grid) {
         }
     }
 
-    // update GUI
+    // update GUI with AI move made
     GtkWidget *button = gtk_grid_get_child_at(grid, aiMove[1], aiMove[0]);
     gtk_button_set_label(GTK_BUTTON(button), curPlayer);
 
@@ -80,6 +83,7 @@ void computerMove(char board[3][3], GtkGrid *grid) {
     --blankSpaces;
 }
 
+// Minimax function to find the most optimal move to win
 int minimax(char board[3][3], int player) {
     checkWinner(winner);
     int addWinner = (*winner == *PLAYER2) ? 1 : -1;
