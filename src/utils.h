@@ -6,7 +6,7 @@ int blankSpaces;
 // Array to store the moves made by player
 char board[3][3];
 // Array to store the empty positions coordinates
-int boardEmptyPos[9][2];
+int boardPos[9][2];
 // To track the current player symbol
 char curPlayer[2];
 // Set flag to enable game reset
@@ -18,7 +18,7 @@ int aiEasyMode;
 // Set flag if current play mode is 1 or 2 Player
 int modeP1;
 
-void checkEmptyPos(int boardEmptyPos[9][2]);
+void checkEmptyPos(int boardPos[9][2]);
 void checkWinner(char *winner);
 int checkWinnerOrTie();
 void incCounterScore(GtkLabel *obj);

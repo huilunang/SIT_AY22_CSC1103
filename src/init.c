@@ -25,7 +25,8 @@ static void reset_callback(GtkWidget *widget, gpointer data)
 }
 
 // Set the game state when either 1 Player easy or hard mode is chosen
-static void aiDifficulty_callback(GtkWidget *widget, gpointer data) {
+static void aiDifficulty_callback(GtkWidget *widget, gpointer data)
+{
   gtk_label_set_label(noticeModeLabel, "1 PLAYER MODE");
   gtk_label_set_label(p2Label, "Computer (O)");
   modeP1 = TRUE;
@@ -182,6 +183,8 @@ void activate(GtkApplication *app, gpointer user_data)
 
   // Initialise game variables
   setUp();
+  // Sets seed to current time to generate a new number when rand() is called
+  srand(time(0));
   modeP1 = FALSE;
 
   gtk_widget_show(GTK_WIDGET(window));
