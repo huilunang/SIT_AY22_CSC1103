@@ -3,8 +3,9 @@
 #include "players.h"
 #include "utils.h"
 
+// Gets all the empty position for AI to randomly select to make a move
 void checkEmptyPos(int boardEmptyPos[9][2]) {
-    countEmptyPos = 0;
+    int countEmptyPos = 0;
 
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 3; ++col) {            
@@ -17,6 +18,7 @@ void checkEmptyPos(int boardEmptyPos[9][2]) {
     }
 }
 
+// Checks if the player has won after making a move
 void checkWinner(char *winner)
 {
     int i;
@@ -57,7 +59,8 @@ void checkWinner(char *winner)
     return;
 }
 
-int checkWinnerOrDraw()
+// Check for winner or a tie state
+int checkWinnerOrTie()
 {
     checkWinner(winner);
 
@@ -65,6 +68,7 @@ int checkWinnerOrDraw()
     {
         reset = TRUE;
 
+        // Update to notify which player has won
         if (*winner == *PLAYER1)
         {
             incCounterScore(p1Score);
@@ -91,6 +95,7 @@ int checkWinnerOrDraw()
     return 0;
 }
 
+// Increments the scoreboard
 void incCounterScore(GtkLabel *obj)
 {
     int winnerCount;
@@ -101,6 +106,7 @@ void incCounterScore(GtkLabel *obj)
     gtk_label_set_text(obj, temp);
 }
 
+// Sets the board back to its original state
 void setBoard(GtkGrid *grid)
 {
     for (int row = 0; row < 3; row++)
@@ -114,6 +120,7 @@ void setBoard(GtkGrid *grid)
     }
 }
 
+// Set up the game to its original state
 void setUp()
 {
     strcpy(curPlayer, PLAYER1);
@@ -123,6 +130,7 @@ void setUp()
     setBoard(grid);
 }
 
+// Reset the game and GUI to its original state
 void resetBoard() {
     setUp();
     gtk_label_set_label(noticeStatusLabel, "Player 1's Turn");

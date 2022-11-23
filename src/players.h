@@ -4,6 +4,7 @@
 extern char *PLAYER1;
 extern char *PLAYER2;
 
+// Store the optimal move made by AI
 int aiMove[3];
 
 void playerMove(GtkWidget *grid, gpointer data);
