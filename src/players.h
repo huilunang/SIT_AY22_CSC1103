@@ -4,11 +4,10 @@
 extern char *PLAYER1;
 extern char *PLAYER2;
 
-// Store the optimal move made by AI
-int aiMove[3];
-
-void playerMove(GtkWidget *grid, gpointer data);
+static int easyMove();
+static int hardMove();
+static int minimax(char board[3][3], int player);
 void computerMove(char board[3][3], GtkGrid *grid);
-int minimax(char board[3][3], int player);
+void playerMove(GtkWidget *grid, gpointer data);
 
 #endif
