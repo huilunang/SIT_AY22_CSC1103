@@ -29,7 +29,7 @@ void computerMove(char board[3][3], GtkGrid *grid) {
         srand(time(0));
         
         // 30% chance to have AI randomly choose a position
-        if (rand() % 9 > 2) {
+        if (rand() % 9 <= 2) {
             // get all the empty position coordinates in the board
             checkEmptyPos(boardEmptyPos);
             // randomly select a position to place the move
