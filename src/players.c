@@ -33,7 +33,7 @@ void computerMove(char board[3][3], GtkGrid *grid) {
             // get all the empty position coordinates in the board
             checkEmptyPos(boardEmptyPos);
             // randomly select a position to place the move
-            int randPos = rand() % countEmptyPos;
+            int randPos = rand() % blankSpaces;
 
             // update GUI
             GtkWidget *button = gtk_grid_get_child_at(grid,
@@ -104,6 +104,7 @@ int minimax(char board[3][3], int player) {
                 char playSymbol = (player == 1) ? *PLAYER2 : *PLAYER1;
                 board[row][col] = playSymbol;
 
+                // Call minimax for the next player
                 int score = -minimax(board, player*-1);
 
                 // Pick the move that's worst for the opponent

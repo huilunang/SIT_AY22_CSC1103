@@ -3,21 +3,28 @@
 #include "players.h"
 #include "utils.h"
 
+// GUI Label widget to display 1 or 2 Player mode
 GtkLabel *noticeModeLabel;
+// GUI Label widget to display player 2 as human or computer
 GtkLabel *p2Label;
+// GUI Window widget to display choosing 1 or 2 Player mode
 GtkWidget *modeModal;
+// GUI Window widget to display choosing 1 Player easy or hard mode
 GtkWidget *aiDifficultyModal;
 
+// Quit the application
 static void quit_callback(GtkWindow *window)
 {
   gtk_window_close(window);
 }
 
+// Reset the state of application
 static void reset_callback(GtkWidget *widget, gpointer data)
 {
   resetBoard();
 }
 
+// Set the game state when either 1 Player easy or hard mode is chosen
 static void aiDifficulty_callback(GtkWidget *widget, gpointer data) {
   gtk_label_set_label(noticeModeLabel, "1 PLAYER MODE");
   gtk_label_set_label(p2Label, "Computer (O)");
@@ -33,20 +40,24 @@ static void aiDifficulty_callback(GtkWidget *widget, gpointer data) {
   gtk_widget_hide(aiDifficultyModal);
 }
 
+// Set the game state when either 1 or 2 Player mode is chosen
 static void modePlayer_callback(GtkWidget *widget, gpointer data)
 {
+  // 2 Player mode
   if (strcmp(gtk_button_get_label(data), "2 Player") == 0) {
     gtk_label_set_label(noticeModeLabel, "2 PLAYER MODE");
     gtk_label_set_label(p2Label, "Player 2 (O)");
     modeP1 = FALSE;
     resetBoard();
   } else {
+    // 1 Player mode
     gtk_widget_show(aiDifficultyModal);
   }
 
   gtk_widget_hide(modeModal);
 }
 
+// Closes the current modal view if user does not want to select the modes
 static void closeModal_callback(GtkWidget *widget, gpointer data)
 {
   if (strcmp(gtk_widget_get_css_name(data), "modeCloseBtn") == 0) {
@@ -56,14 +67,16 @@ static void closeModal_callback(GtkWidget *widget, gpointer data)
   }
 }
 
+// Show the modal for user to select 1 or 2 Player
 static void mode_callback(GtkWidget *widget, gpointer data)
 {
   gtk_widget_show(modeModal);
 }
 
+// Gets activated when players made their move
 static void play_callback(GtkWidget *widget, gpointer data)
 {
-  // reset game
+  // Reset game
   if (reset == TRUE)
   {
     setUp();
@@ -76,20 +89,21 @@ static void play_callback(GtkWidget *widget, gpointer data)
   {
     playerMove(GTK_WIDGET(grid), data);
 
-    if (checkWinnerOrDraw() == 1)
+    // Check for winner after making a move
+    if (checkWinnerOrTie() == 1)
       return;
 
-    // set curPlayer to the next player
+    // Set curPlayer to the next player
     *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
 
-    // Play with AI is enabled
+    // If play with AI is enabled
     if (modeP1 == TRUE)
     {
       gtk_label_set_label(noticeStatusLabel, "Computer's Turn");
       // Get move from AI
       computerMove(board, grid);
 
-      if (checkWinnerOrDraw() == 1)
+      if (checkWinnerOrTie() == 1)
         return;
 
       *curPlayer = (strcmp(curPlayer, PLAYER1) == 0) ? *PLAYER2 : *PLAYER1;
